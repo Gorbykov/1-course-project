@@ -25,7 +25,7 @@
 \usepackage{pgfplots, pgfplotstable}
 
 \usepackage{comment}
-
+\usepackage{svg}
 % Зачем: Учет особенностей различных языков.
 \usepackage[russian]{babel}
 
@@ -53,7 +53,7 @@
 
 % Зачем: Настраивает межстрочный интервал, для размещения 40 +/- 3 строки текста на странице.
 % Почему: Пункт 2.1.1 Требований по оформлению пояснительной записки.
-\usepackage[nodisplayskipstretch]{setspace} 
+\usepackage{setspace} 
 \setstretch{1.1}
 \onehalfspacing
 
@@ -216,7 +216,10 @@
 \captionsetup{labelsep=stb}
 \captionsetup[figure]{labelformat=stbfigure,justification=centering}
 \captionsetup[table]{labelformat=stbtable,justification=raggedright}
-\renewcommand{\thesubfigure}{\asbuk{subfigure}}
+%\renewcommand{\thesubfigure}{\asbuk{subfigure}}
+\captionsetup[subfigure]{labelformat=simple}
+\renewcommand{\thesubfigure}{\alph{subfigure})}
+
 
 % Зачем: Окружения для оформления формул
 % Почему: Пункт 2.4.7 требований по оформлению пояснительной записки и специфические требования различных кафедр
@@ -458,6 +461,9 @@
 % Тире в словае заменяем на \hyph: аппаратно\hyphпрограммный.
 % https://stackoverflow.com/questions/2193307/how-to-get-latex-to-hyphenate-a-word-that-contains-a-dash#
 \def\hyph{-\penalty0\hskip0pt\relax}
+\usepackage[none]{hyphenat}
+\usepackage{ragged2e}
+\sloppy
 
 % Добавляем абзацный отступ для библиографии
 % https://github.com/mstyura/bsuir-diploma-latex/issues/19
