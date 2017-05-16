@@ -167,13 +167,21 @@ G = \sqrt{{G_x}^2 + {G_y}^2}
     \label{fig:uml}
 \end{figure} 
 
-
 \subsubsection{Main.cpp}~
 
+Содержит функции , реализующие основную логику программы и чтение/запись файлов. В некоторых из данных функций встречаются одинаковые параметры:
+
+capture -- входной видеопоток из которого происходит чтение данных.
+
+frameSize -- размер кадра оригинального видео.
+
+video -- массив изображений в который покадрово записывается видео готовое к обработке.
+
+offsets -- массив относительных смещений кадров, вычесляемых в процессе работы алгоритмов.
 
 \textit{main()} -- точка входа в программу. В зависимости от варианта сборки запускает функцию \textit{textUI()} или \textit{testParam()}.
 
-\textit{textGUI()} -- реализует текстовый интерфейс для взаимодействия с пользователем. Как видно на рисунке \ref{fig:textUI} пользователь может выбрать тип маски и алгоритм, а также диапазон обрабатываемых кадров.
+\textit{textUI()} -- реализует текстовый интерфейс для взаимодействия с пользователем. Как видно на рисунке \ref{fig:textUI} пользователь может выбрать тип маски и алгоритм, а также диапазон обрабатываемых кадров.
 \begin{figure}[h]
     \centering   
     \includegraphics{textUI.png} 
@@ -185,17 +193,15 @@ G = \sqrt{{G_x}^2 + {G_y}^2}
 
 \textit{vector<Mat> makeVideo( VideoCapture *capture, Size2i *frameSize, int start = 1, int length = -1)} -- загружает видео в виде вектора изображений из видео потока \textit{capture}. Также возвращает размеры кадра. Может принимать номер первого кадра и длину получаемого видео. 
 
-\textit{Mat getFrame(VideoCapture *capture, vector<Mat> *video)}
+\textit{Mat getFrame( VideoCapture *capture, vector<Mat> *video)} -- читает следующий кадр из видеопотока, подготавливает его и записывает в массив кадров.
 
-\textit{run(Size2i frameSize, vector<Mat> *video, Mat *map, Delta *delta,
-    vector<Point2i> *offsets)}
+\textit{run( Size2i frameSize, vector<Mat> *video, Mat *map, Delta *delta,
+    vector<Point2i> *offsets)} -- обрабатывает видео и запускает создание результирующего изображения \textit{map}. Для этого принимает объект \textit{delta} определяющий каким алгоритмом будет вычислено относительное смещение кадров.
 
-\textit{Mat makeMap(Size2i frameSize, vector<Mat> *video, vector<Point2i> *offsets,
-    int maxL, int maxR, int maxD, int maxU)}
+\textit{Mat makeMap( Size2i frameSize, vector<Mat> *video, vector<Point2i> *offsets,
+    int maxL, int maxR, int maxD, int maxU)} -- создает результирующее изображение, для этого требуется узнать максимальные абсолютные смещения кадров во всех четырех направлениях.
 
-\textit{int printErr(vector<Mat> *video, vector<Point2i> *offsets, ofstream *sout, Mask *mCreator2)
-}
-
+\textit{int printErr( vector<Mat> *video, vector<Point2i> *offsets, ofstream *sout, Mask *mCreator2)} -- выводит в текстовый файл дополнительные статистические данные.
 
 \subsubsection{Класс BrightControl~}
 \subsubsection{Абстрактный класс Delta~}
