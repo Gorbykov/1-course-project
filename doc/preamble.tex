@@ -216,9 +216,10 @@
 \captionsetup{labelsep=stb}
 \captionsetup[figure]{labelformat=stbfigure,justification=centering}
 \captionsetup[table]{labelformat=stbtable,justification=raggedright}
-%\renewcommand{\thesubfigure}{\asbuk{subfigure}}
+
 \captionsetup[subfigure]{labelformat=simple}
-\renewcommand{\thesubfigure}{\alph{subfigure})}
+\renewcommand{\thesubfigure}{\asbuk{subfigure})\bigskip}
+%\renewcommand{\thesubfigure}{\alph{subfigure})}
 
 
 % Зачем: Окружения для оформления формул
@@ -468,6 +469,19 @@
 % Добавляем абзацный отступ для библиографии
 % https://github.com/mstyura/bsuir-diploma-latex/issues/19
 \setlength\bibindent{-1.0900cm}
+
+%
+\makeatletter 
+\def\redeflsection{\def\l@section{\@dottedtocline{1}{0em}{8.8em}}} 
+\renewcommand\appendix{\par 
+    \setcounter{section}{2}% 
+    \setcounter{subsection}{2}% 
+    \def\appendixname{ПРИЛОЖЕНИЕ}
+    \def\@chapapp{\appendixname}%
+    \addtocontents{toc}{\protect\redeflsection}
+    \def\thesection{\appendixname~\@Asbuk\c@section}}
+\makeatother
+%
 
 \makeatletter
 \renewcommand\NAT@bibsetnum[1]{\settowidth\labelwidth{\@biblabel{#1}}%
