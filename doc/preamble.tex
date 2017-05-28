@@ -2,6 +2,7 @@
 % Зачем: Определяет класс документа (То, как будет выглядеть документ)
 % Примечание: параметр draft помечает строки, вышедшие за границы страницы, прямоугольником, в фильной версии его нужно удалить.
 \documentclass[a4paper,14pt,russian,oneside,final]{extreport}
+\usepackage[T2A]{fontenc}
 
 % Зачем: Настройка Times New Roman.
 % Рекомендовано для Windows (нужен PSCyr, подробности см. в fonts_windows.tex)
@@ -139,7 +140,9 @@
     {\raggedright\hyphenpenalty=10000\normalfont\large\bfseries\MakeUppercase}}
 \makeatother
 
-
+%%%
+\renewcommand{\appendixname}{Приложение}
+%%%
 % Зачем: Задает стиль заголовков подразделов
 % Почему: Пункты 2.1.1, 2.2.5 и ПРИЛОЖЕНИЕ Л Требований по оформлению пояснительной записки.
 \makeatletter
@@ -471,16 +474,6 @@
 \setlength\bibindent{-1.0900cm}
 
 %
-\makeatletter 
-\def\redeflsection{\def\l@section{\@dottedtocline{1}{0em}{8.8em}}} 
-\renewcommand\appendix{\par 
-    \setcounter{section}{2}% 
-    \setcounter{subsection}{2}% 
-    \def\appendixname{ПРИЛОЖЕНИЕ}
-    \def\@chapapp{\appendixname}%
-    \addtocontents{toc}{\protect\redeflsection}
-    \def\thesection{\appendixname~\@Asbuk\c@section}}
-\makeatother
 %
 
 \makeatletter
