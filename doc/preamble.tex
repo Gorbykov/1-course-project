@@ -475,6 +475,9 @@
 
 %
 %
+\makeatletter
+\renewcommand\@biblabel[1]{#1}
+\makeatother
 
 \makeatletter
 \renewcommand\NAT@bibsetnum[1]{\settowidth\labelwidth{\@biblabel{#1}}%
